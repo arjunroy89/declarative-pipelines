@@ -2,22 +2,12 @@ pipeline {
     agent any 
     
     environment {
-        SENTENCE = "I hope your brother's El Camino runs forever"
     }
     
     stages {
-        stage('Hello'){
+        stage('SCM'){
             steps {
-               echo 'Hello World!'
-               
-               script {
-                   def words = env.SENTENCE.split(' ')
-                   
-                   for (word in words){
-                       echo word
-                   }
-                   
-               }
+                   git branch: 'main', url: 'https://github.com/FeynmanFan/declarative-pipelines.git'
             }
         }
     }
