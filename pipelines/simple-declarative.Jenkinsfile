@@ -1,10 +1,16 @@
 pipeline {
-    agent any 
+    agent {label "aero"}
     
     stages {
         stage('SCM'){
             steps {
-                   git branch: 'main', url: 'https://github.com/FeynmanFan/declarative-pipelines.git'
+                git branch: 'main', url: 'https://github.com/FeynmanFan/declarative-pipelines.git'
+            }
+        }
+        stage('build'){
+            steps{
+                echo "Build the code"
+                // build the code
             }
         }
     }
