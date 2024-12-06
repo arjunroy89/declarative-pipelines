@@ -16,6 +16,7 @@ pipeline {
                     steps {
                         echo 'perform static analysis'
                         sleep time: 3, unit: 'SECONDS'
+                        echo 'sa complete'
                     }
                 }
                 stage('build and test'){
@@ -24,6 +25,7 @@ pipeline {
                             steps {
                                 echo 'build the code'
                                 sleep time: 3, unit: 'SECONDS'
+                                echo 'build complete'
                                 // build the code
                             }
                         }
@@ -31,6 +33,7 @@ pipeline {
                             steps{
                                 echo 'execute unit tests'
                                 sleep time: 3, unit: 'SECONDS'
+                                echo 'unit tests complete'
                             }
                         }
                     }
