@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    parameters{
+        string("name:'branch', defaultValue:'main', description: 'The branch to fetch for the pipeline")
+    }
     
     triggers{
         cron('0 3 * * 1-5')
