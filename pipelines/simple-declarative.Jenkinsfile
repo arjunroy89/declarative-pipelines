@@ -9,14 +9,19 @@ pipeline {
     }
 
     stages {
+        stage("Check parameter"){
+            steps{
+                echo "The value of the branch is '${branch}'"
+            }
+        }
         stage('SCM') {
             steps {
-                echo "The value of the branch is '${branch}'"
+                
                 git branch: "${branch}", url: 'https://github.com/FeynmanFan/declarative-pipelines.git'
             }
         }
 
-        stage('Build') {
+        stage('build') {
             steps {
                 echo 'build the code'
                 // build the code
