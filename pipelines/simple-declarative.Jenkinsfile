@@ -26,7 +26,6 @@ pipeline {
             when {
                 branch == 'release'
             }
-            }
             steps {
                 echo 'Packaging the code for release'
             }
