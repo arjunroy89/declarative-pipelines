@@ -24,7 +24,7 @@ pipeline {
 
         stage('Package') {
             when {
-                branch == 'release'
+                branch 'release'
             }
             steps {
                 echo 'Packaging the code for release'
