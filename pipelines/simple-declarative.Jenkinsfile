@@ -17,5 +17,13 @@ pipeline {
                 // build the code
             }
         }
+        stage('Package'){
+            when {
+                branch 'release'
+            }
+            steps{
+                echo 'Packing the code'
+            }
+        }
     }
 }
