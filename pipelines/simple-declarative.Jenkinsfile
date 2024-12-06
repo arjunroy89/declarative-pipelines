@@ -24,9 +24,8 @@ pipeline {
 
         stage('Package') {
             when {
-                expression {
-                    return branch == 'release'
-                }
+                branch == 'release'
+            }
             }
             steps {
                 echo 'Packaging the code for release'
