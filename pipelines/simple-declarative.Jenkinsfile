@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('SCM') {
             steps {               
-                git branch: "${params.branch}", url: 'https://github.com/FeynmanFan/declarative-pipelines.git'
+                git branch: '${branch}', url: 'https://github.com/FeynmanFan/declarative-pipelines.git'
             }
         }
 
@@ -24,7 +24,9 @@ pipeline {
 
         stage('Package') {
             when {
-                branch 'release'
+                expression {
+                    return params.branch == "release"
+                }
             }
             steps {
                 echo 'Packaging the code for release'
