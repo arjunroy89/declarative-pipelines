@@ -11,6 +11,7 @@ pipeline {
     stages {
         stage('SCM'){
             steps {
+                echo "${params.branch}"
                 git branch: "${params.branch}", url: 'https://github.com/FeynmanFan/declarative-pipelines.git'
             }
         }
