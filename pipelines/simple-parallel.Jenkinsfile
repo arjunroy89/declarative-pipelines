@@ -10,23 +10,31 @@ pipeline {
                 git branch: '${branch}', url: 'https://github.com/FeynmanFan/declarative-pipelines.git'
             }
         }
-        stage('static analysis'){
-            steps {
-                echo 'perform static analysis'
-                sleep time: 3, unit: 'SECONDS'
-            }
-        }
-        stage('build') {
-            steps {
-                echo 'build the code'
-                sleep time: 3, unit: 'SECONDS'
-                // build the code
-            }
-        }
-        stage('unit test'){
-            steps{
-                echo 'execute unit tests'
-                sleep time: 3, unit: 'SECONDS'
+        stage('parallel phases'){
+            parallel{
+                stage('static analysis'){
+                    steps {
+                        echo 'perform static analysis'
+                        sleep time: 3, unit: 'SECONDS'
+                    }
+                }
+                stage('build and test'){
+                    stages{
+                        stage('build') {
+                            steps {
+                                echo 'build the code'
+                                sleep time: 3, unit: 'SECONDS'
+                                // build the code
+                            }
+                        }
+                        stage('unit test'){
+                            steps{
+                                echo 'execute unit tests'
+                                sleep time: 3, unit: 'SECONDS'
+                            }
+                        }
+                    }
+                }
             }
         }
         stage('Package') {
