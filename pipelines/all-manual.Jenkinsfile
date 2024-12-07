@@ -7,8 +7,20 @@ pipeline{
                 echo 'static-analysis'
 
                 script{
-                    input message: "Have you performed static analysis and that has resulted in no High or Critical issues?", 
-                        ok: "Yes, I have"
+                    def number = input(
+                         message: "Have you performed static analysis and that has resulted in no High or Critical issues?", 
+                        parameters: [
+                            string(name: 'Value', description: 'Enter a value equally divisible by three.')
+                        ]
+                    )
+
+                    def num = number.toInteger()
+
+                    if (num % 3 == 0){
+                        echo "Divisible by three"
+                    }else{
+                        error "Not divisible by three"
+                    }
                 }
             }
         }
