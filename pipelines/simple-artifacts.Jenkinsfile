@@ -13,7 +13,7 @@ pipeline{
         stage('Test'){
             steps{
                 echo 'Execute unit tests'
-                echo 'Test data' > 'tests/testresults.xml'
+                sh 'mkdir -p tests && echo "test results" > tests/testresults.xml'
             }
         }
     }
