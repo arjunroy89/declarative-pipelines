@@ -33,9 +33,13 @@ pipeline{
 
                 def targetURL = "https://dev.azure.com/${env.ORG}/${env.PROJECT}/_apis/build/builds?api-version=7.1"
 
-                def requestBody = {
-                    "definition": {"id": PIPELINE}
+                def requestBody = """
+                {
+                    "definition": {
+                        "id": ${PIPELINE}
+                    }
                 }
+                """
 
                 def encodedToken = PAT.tokenize(':').collect { it.bytes.encodeBase64().toString() }.join(':')
 
