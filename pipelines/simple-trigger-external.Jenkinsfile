@@ -33,9 +33,11 @@ pipeline{
 
                 def targetURL = "https://dev.azure.com/${env.ORG}/${env.PROJECT}/_apis/build/builds?definitionId=${env.PIPELINE}&api-version=7.1"
 
+                def authHeader = 'Authorization: Basic $(echo -n :$PAT | base64)' 
+
                 sh '''
                         curl -X POST \\
-                             -H 'Authorization: Basic $(echo -n :$PAT | base64)' \\
+                             -H $authHeader \\
                              -H 'Content-Type: application/json' \\
                              '$targetURL'
                     '''
