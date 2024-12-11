@@ -33,7 +33,7 @@ pipeline{
 
                 def targetURL = "https://dev.azure.com/${env.ORG}/${env.PROJECT}/_apis/pipelines/${env.PIPELINE}/runs?api-version=7.1"
 
-                def response = httprequest(
+                def response = httpRequest(
                     httpMode: 'POST', 
                     url: targetURL,
                     customHeaders: [[name: 'Authorization', value: "Basic ${env.PAT.tokenize(':').collect {it.bytes.encodeBase64().toString()}.join(':')}"]],
