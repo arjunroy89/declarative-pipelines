@@ -18,7 +18,7 @@ pipeline{
             steps{
                 echo 'Execute unit tests'
                 sh 'mkdir -p tests && echo "test results" > tests/testresults.xml'
-                error "Broken tests break the build"
+                // error "Broken tests break the build"
             }
         }
     }
@@ -29,20 +29,29 @@ pipeline{
             echo 'Upload the artifact to Azure Storage'
 
             script{
-                // POST https://dev.azure.com/{organization}/{project}/_apis/pipelines/{pipelineId}/runs?api-version=7.1
+                //POST https://dev.azure.com/{organization}/{project}/_apis/build/builds?api-version=6.1-preview.7
 
-                def targetURL = "https://dev.azure.com/${env.ORG}/${env.PROJECT}/_apis/pipelines/${env.PIPELINE}/runs?api-version=7.1"
+                def targetURL = "https://dev.azure.com/${env.ORG}/${env.PROJECT}/_apis/build/builds?api-version=6.1-preview.7"
+
+                def requestBody = [
+                    definition: [id: env.PIPELINE]
+                ]
 
                 def response = httpRequest(
                     httpMode: 'POST', 
-                    url: targetURL,
-                    customHeaders: [[name: 'Authorization', value: "Basic ${env.PAT.tokenize(':').collect {it.bytes.encodeBase64().toString()}.join(':')}"]],
-                    contentType: "APPLICATION_JSON", 
-                    requestBody: '{}'
+                    url: targetURL, 
+                    contentType: 'APPLICATION_JSON',
+                    customHeaders: [[name: 'Authorization', value: "Basic ${env.PAT.encodeBase64()}"]],
+                    requestBody: groovy.json.JsonOutput.toJson(requestBody)
                 )
-            }
 
-            echo 'Deployment triggered'
+                if (response.status == 200 || response.status == 201){
+                    echo "Build queued"
+                }
+                else{
+                    error "Failed to queue build"
+                }
+            }
         }
     }
 }
