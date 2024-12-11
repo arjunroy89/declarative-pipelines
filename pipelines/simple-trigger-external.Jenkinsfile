@@ -31,7 +31,7 @@ pipeline{
             script{
                 //POST https://dev.azure.com/{organization}/{project}/_apis/build/builds?api-version=6.1-preview.7
 
-                def targetURL = "https://dev.azure.com/${env.ORG}/${env.PROJECT}/_apis/build/builds?api-version=6.1-preview.7"
+                def targetURL = "https://dev.azure.com/${env.ORG}/${env.PROJECT}/_apis/build/builds?api-version=6.0"
 
                 def requestBody = [
                     definition: [id: env.PIPELINE]
