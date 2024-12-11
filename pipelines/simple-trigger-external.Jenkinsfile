@@ -34,7 +34,7 @@ pipeline{
                 def targetURL = "https://dev.azure.com/${env.ORG}/${env.PROJECT}/_apis/build/builds?api-version=7.1"
 
                 def requestBody = [
-                    definition: [id: env.PIPELINE]
+                    definition: ["id": PIPELINE]
                 ]
 
                 def response = httpRequest(
