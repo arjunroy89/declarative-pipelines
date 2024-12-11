@@ -36,6 +36,8 @@ pipeline{
 
                 def encodedToken = PAT.tokenize(':').collect { it.bytes.encodeBase64().toString() }.join(':')
 
+                echo encodedToken
+
                 def response = httpRequest(
                     httpMode: 'POST', 
                     url: targetURL, 
