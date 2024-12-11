@@ -37,7 +37,7 @@ pipeline{
                     httpMode: 'POST', 
                     url: targetURL, 
                     contentType: 'APPLICATION_JSON',
-                    customHeaders: [['name': 'Authentication', 'value': "Basic ${env.PAT.bytes.encodeBase64().toString()}"]]
+                    customHeaders: [['name': 'Authentication', 'value': "Basic :${env.PAT.bytes.encodeBase64().toString()}"]]
                 )
 
                 if (response.status == 200 || response.status == 201){
