@@ -41,14 +41,13 @@ pipeline{
                     httpMode: 'POST', 
                     url: targetURL, 
                     contentType: 'APPLICATION_JSON',
-                    customHeaders: [[name: 'Authorization', value: "Basic ${env.PAT.encodeBase64()}"]],
+                    customHeaders: [[name: 'Authorization', value: "Basic ${env.AZURE_DEVOPS_PAT.tokenize(':').collect { it.bytes.encodeBase64().toString() }.join(':')}"]],
                     requestBody: groovy.json.JsonOutput.toJson(requestBody)
                 )
 
-                if (response.status == 200 || response.status == 201){
+                if (response.status == 200 || response.status == 201) {
                     echo "Build queued"
-                }
-                else{
+                }else{
                     error "Failed to queue build"
                 }
             }
