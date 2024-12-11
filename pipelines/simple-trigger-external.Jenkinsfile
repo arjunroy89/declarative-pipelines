@@ -40,8 +40,7 @@ pipeline{
                     httpMode: 'POST', 
                     url: targetURL, 
                     contentType: 'APPLICATION_JSON',
-                    customHeaders: [['name': 'Authorization', 'value': "Basic ${encodedToken}"]],
-                    requestBody: groovy.json.JsonOutput.toJson(requestBody)
+                    customHeaders: [['name': 'Authorization', 'value': "Basic ${encodedToken}"]]
                 )
 
                 if (response.status == 200 || response.status == 201){
