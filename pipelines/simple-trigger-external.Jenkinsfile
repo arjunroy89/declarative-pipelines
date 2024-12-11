@@ -33,6 +33,8 @@ pipeline{
 
                 def targetURL = "https://dev.azure.com/${env.ORG}/${env.PROJECT}/_apis/build/builds?definitionId=${env.PIPELINE}&api-version=7.1"
 
+                echo "Basic ${env.PAT.bytes.encodeBase64().toString()}"
+
                 def response = httpRequest(
                     httpMode: 'POST', 
                     url: targetURL, 
