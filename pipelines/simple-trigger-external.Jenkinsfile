@@ -33,13 +33,11 @@ pipeline{
 
                 def targetURL = "https://dev.azure.com/${env.ORG}/${env.PROJECT}/_apis/build/builds?definitionId=${env.PIPELINE}&api-version=7.1"
 
-                echo "Basic ${env.PAT.bytes.encodeBase64().toString()}"
-
                 def response = httpRequest(
                     httpMode: 'POST', 
                     url: targetURL, 
                     contentType: 'APPLICATION_JSON',
-                    customHeaders: [['name': 'Authorization', 'value': "Basic ${env.PAT.bytes.encodeBase64().toString()}"]]
+                    customHeaders: [['name': 'Authentication', 'value': "Basic ${env.PAT.bytes.encodeBase64().toString()}"]]
                 )
 
                 if (response.status == 200 || response.status == 201){
