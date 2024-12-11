@@ -35,7 +35,7 @@ pipeline{
 
                 def authHeader = 'Authorization: Basic $(echo -n :$PAT | base64)' 
 
-                sh 'curl -X POST -H ${authHeader} -H "Content-Type: application/json" https://dev.azure.com/OurWebCompany/OurNewApplication/_apis/build/builds?definitionId=50&api-version=7.1'
+                sh 'curl -X POST -H ${authHeader} -H "Content-Type: application/json" -H "Content-Length: 0" --url https://dev.azure.com/OurWebCompany/OurNewApplication/_apis/build/builds?definitionId=50&api-version=7.1'
             }
         }
     }
