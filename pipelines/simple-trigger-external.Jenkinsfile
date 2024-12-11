@@ -41,7 +41,7 @@ pipeline{
                     httpMode: 'POST', 
                     url: targetURL, 
                     contentType: 'APPLICATION_JSON',
-                    customHeaders: [[name: 'Authorization', value: "Basic ${env.PAT.tokenize(':').collect { it.bytes.encodeBase64().toString() }.join(':')}"]],
+                    customHeaders: [['name': 'Authorization', 'value': "Basic ${env.PAT.tokenize(':').collect { it.bytes.encodeBase64().toString() }.join(':')}"]],
                     requestBody: groovy.json.JsonOutput.toJson(requestBody)
                 )
 
