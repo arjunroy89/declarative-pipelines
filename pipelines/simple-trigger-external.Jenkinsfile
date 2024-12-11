@@ -39,7 +39,7 @@ pipeline{
                         curl -X POST \\
                              -H $authHeader \\
                              -H 'Content-Type: application/json' \\
-                             'https://dev.azure.com/OurWebCompany/OurNewApplication/_apis/build/builds?definitionId=50&api-version=7.1'
+                             "https://dev.azure.com/OurWebCompany/OurNewApplication/_apis/build/builds?definitionId=50&api-version=7.1"
                     '''
             }
         }
