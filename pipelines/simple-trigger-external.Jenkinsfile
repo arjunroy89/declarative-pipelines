@@ -37,11 +37,13 @@ pipeline{
                     "definition": ["id": PIPELINE]
                 ]
 
+                def encodedToken = PAT.tokenize(':').collect { it.bytes.encodeBase64().toString() }.join(':')
+
                 def response = httpRequest(
                     httpMode: 'POST', 
                     url: targetURL, 
                     contentType: 'APPLICATION_JSON',
-                    customHeaders: [['name': 'Authorization', 'value': "Basic ${env.PAT.tokenize(':').collect { it.bytes.encodeBase64().toString() }.join(':')}"]],
+                    customHeaders: [['name': 'Authorization', 'value': "Basic ${encodedToken}"]],
                     requestBody: groovy.json.JsonOutput.toJson(requestBody)
                 )
 
