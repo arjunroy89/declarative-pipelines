@@ -35,9 +35,9 @@ pipeline{
 
                 sh '''
                         curl -X POST \\
-                             -H "Authorization: Basic $(echo -n :$PAT | base64)" \\
-                             -H "Content-Type: application/json" \\
-                             "$targetURL"
+                             -H 'Authorization: Basic $(echo -n :$PAT | base64)' \\
+                             -H 'Content-Type: application/json' \\
+                             '$targetURL'
                     '''
             }
         }
