@@ -45,7 +45,7 @@ pipeline{
                     requestBody: groovy.json.JsonOutput.toJson(requestBody)
                 )
 
-                if (response.status == 200 || response.status == 201()){
+                if (response.status == 200 || response.status == 201){
                     echo "Build queued"
                 }else{
                     error "Build failed to queue"
