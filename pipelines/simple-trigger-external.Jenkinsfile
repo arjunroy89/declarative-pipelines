@@ -33,18 +33,12 @@ pipeline{
 
                 def targetURL = "https://dev.azure.com/${env.ORG}/${env.PROJECT}/_apis/build/builds?definitionId=${env.PIPELINE}&api-version=7.1"
 
-                def response = httpRequest(
-                    httpMode: 'POST', 
-                    url: targetURL, 
-                    contentType: 'APPLICATION_JSON',
-                    customHeaders: [['name': 'Authentication', 'value': "Basic :${env.PAT.bytes.encodeBase64().toString()}"]]
-                )
-
-                if (response.status == 200 || response.status == 201){
-                    echo "Build queued"
-                }else{
-                    error "Build failed to queue"
-                }
+                sh """
+                    curl -X POST \\
+                        -H "Authorization: Basic $(echo -n :$PAT | base64)" \\
+                        -H "Content-Type: application/json" \\
+                        "$targetURL"
+                """
             }
         }
     }
