@@ -39,7 +39,7 @@ pipeline{
                         curl -X POST \\
                              -H $authHeader \\
                              -H 'Content-Type: application/json' \\
-                             '$targetURL'
+                             'https://dev.azure.com/${env.ORG}/${env.PROJECT}/_apis/build/builds?definitionId=${env.PIPELINE}&api-version=7.1'
                     '''
             }
         }
