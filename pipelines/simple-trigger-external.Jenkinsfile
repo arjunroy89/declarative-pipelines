@@ -5,7 +5,7 @@ pipeline{
         ARTIFACT_SOURCE_DIRECTORY = "tests/*.xml"
         ORG = 'OurWebCompany'
         PROJECT = 'OurNewApplication'
-        PIPELINE = 'ado-deployer'
+        PIPELINE = '50'
         PAT = credentials('ado-pat')
     }
     stages{
