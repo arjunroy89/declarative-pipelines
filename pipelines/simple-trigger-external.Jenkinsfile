@@ -5,7 +5,7 @@ pipeline{
         ARTIFACT_SOURCE_DIRECTORY = "tests/*.xml"
         ORG = 'OurWebCompany'
         PROJECT = 'OurNewApplication'
-        PIPELINE = '50'
+        PIPELINE_ID = '50'
         PAT = credentials('ado-pat')
     }
     stages{
@@ -33,9 +33,9 @@ pipeline{
 
                 def targetURL = "https://dev.azure.com/${env.ORG}/${env.PROJECT}/_apis/build/builds?definitionId=${env.PIPELINE_ID}}&api-version=7.1"
 
-                def authValue =  ":${env.PAT}".bytes.encodeBase64().toString()
+                def authValue = ":${env.PAT}".bytes.encodeBase64().toString()
 
-                sh "curl -X POST --header 'Content-Type: application/json' --header 'Content-Length: 0' --header 'Authorization: Basic $authValue' --url 'https://dev.azure.com/OurWebCompany/OurNewApplication/_apis/build/builds?definitionId=50&api-version=7.1'"
+                sh "curl -X POST --header 'Content-Type: application/json' --header 'Content-Length:0' --header 'Authorization: Basic $authValue' --url '$targetURL'"
             }
         }
     }
