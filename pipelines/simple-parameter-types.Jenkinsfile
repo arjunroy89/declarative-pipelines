@@ -12,7 +12,7 @@ pipeline{
     stages{
         stage('pre-flight'){
             steps{
-                echo "Text: ${parameter.multiline}"
+                echo "Text: ${params.multiline}"
                 echo "Is current user admin? ${params.isAdmin ? 'Yes' : 'No'}"
                 echo "Target environment: ${params.targetEnvironment}"
             }
