@@ -33,7 +33,7 @@ pipeline{
 
                 def targetURL = "https://dev.azure.com/OurWebCompany/OurNewApplication/_apis/build/builds?definitionId=50&api-version=7.1"
 
-                def authValue = $(echo -n :$PAT | base64)
+                def authValue =  ":${env.PAT}".bytes.encodeBase64().toString()
 
                 sh "curl -X POST --header 'Content-Type: application/json' --header 'Content-Length: 0' --header 'Authorization: Basic $authValue' --url 'https://dev.azure.com/OurWebCompany/OurNewApplication/_apis/build/builds?definitionId=50&api-version=7.1'"
             }
