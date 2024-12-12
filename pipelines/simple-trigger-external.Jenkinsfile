@@ -31,7 +31,7 @@ pipeline{
             script{
                 //POST https://dev.azure.com/{organization}/{project}/_apis/build/builds?api-version=6.1-preview.7
 
-                def targetURL = "https://dev.azure.com/OurWebCompany/OurNewApplication/_apis/build/builds?definitionId=50&api-version=7.1"
+                def targetURL = "https://dev.azure.com/${env.ORG}/${env.PROJECT}/_apis/build/builds?definitionId=${env.PIPELINE_ID}}&api-version=7.1"
 
                 def authValue =  ":${env.PAT}".bytes.encodeBase64().toString()
 
