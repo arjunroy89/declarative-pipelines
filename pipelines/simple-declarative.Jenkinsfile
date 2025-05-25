@@ -1,31 +1,24 @@
 pipeline {
     agent any
-    triggers{
-        cron('0 3 * * 1-5')
+    
+    environment {
+        SENTENCE = "I hope you do well in future"
     }
-
     stages {
-        stage('SCM'){
-            steps{
-                git branch: 'main', url: 'https://github.com/FeynmanFan/declarative-pipelines.git'
-            }
-        }
-        stage('build') {
+        stage("Hello"){
             steps {
-                echo 'build the code'
-                // build the code
-            }
-        }
-
-        stage('Package') {
-            when {
-                expression {
-                    return params.branch == "release"
+                echo 'Hello, world.!'
+                
+                script {
+                    def words = env.SENTENCE.split(' ')
+                    
+                    for (word in words){
+                        echo word
+                    }
+                    
                 }
             }
-            steps {
-                echo 'Packaging the code for release'
-            }
         }
     }
+    
 }
