@@ -4,9 +4,6 @@ pipeline {
         string(name: 'branch', defaultValue: 'main', description: 'The branch to fetch for the pipeline')
     }
 
-    triggers {
-        cron('0 3 * * 1-5')
-    }
     stages {
         stage("SCM"){
             steps {
@@ -14,17 +11,26 @@ pipeline {
 
                 }
             }
-            stage('build'){
-                steps{
-                    echo "Build the code"
+        stage('static analysis'){
+            steps{
+                echo "Perform static analysis"
+                sleep time: 3, unit: 'SECONDS'
+                }
+            }
+        stage('build'){
+            steps{
+                echo "Build the code"
+                sleep time: 3, unit: 'SECONDS'
+                }
+            }
+
+        stage('unit test'){
+            steps{
+                echo "Execute unit tests"
+                sleep time: 3, unit: 'SECONDS'
                 }
             }
         stage("Package"){
-            when {
-                expression {
-                    return params.branch == "release"
-                }
-            }
             steps {
                 echo "Packaging the code for release"
             }
