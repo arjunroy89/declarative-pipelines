@@ -16,6 +16,16 @@ pipeline {
                     echo "Build the code"
                 }
             }
+        stage("Package"){
+            when {
+                expression {
+                    return params.branch == "release"
+                }
+            }
+            steps {
+                echo "Packaging the code for release"
+            }
+        }    
         }
     
 }
