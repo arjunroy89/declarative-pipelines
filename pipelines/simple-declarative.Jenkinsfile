@@ -1,13 +1,16 @@
 pipeline {
     agent any
-    
+    parameters {
+        string(name: 'branch', defaultValue: 'main', description: 'The branch to fetch for the pipeline')
+    }
+
     triggers {
         cron('0 3 * * 1-5')
     }
     stages {
         stage("SCM"){
             steps {
-                    git branch: 'main', url: 'https://github.com/arjunroy89/declarative-pipelines.git'
+                    git branch: "${params.branch}", url: 'https://github.com/arjunroy89/declarative-pipelines.git'
 
                 }
             }
